@@ -19,6 +19,18 @@ def read_record(db):
     conn.close()
     comp()
 
+#func show all worker's list and WorkerNO
+def read_workerlist(db):
+    id = input("Please input ID :")#aka WorkerNO
+    conn = sqlite3.connect(db)
+    cur  = conn.cursor()
+    cmd = "select WorkerNO,WorkerName from WorkerList"
+    cur.execute(cmd)
+    print(cur.fetchall())
+    cur.close()
+    conn.close()
+    comp()
+
 #func incert a new record
 def incert_record(db):
     id = input("Please input ID :")#aka WorkerNO
@@ -122,6 +134,7 @@ if __name__=="__main__":
         print("\tEnter 'i' to insert a new record.")
         print("\tEnter 'd' to delete a record.")
         print("\tEnter 'r' to show someone's record.")
+        print("\tEnter 'n' to show all worker's name and number.")
         print("\tEnter else to quit this script.")
         print("-"*50)
         state = input("Please enter your property:")            
@@ -131,6 +144,8 @@ if __name__=="__main__":
             delete_record(target_db)
         elif state == "r":
             read_record(target_db)
+        elif state == "n":
+            read_workerlist(target_db)
         else:
             break
 
